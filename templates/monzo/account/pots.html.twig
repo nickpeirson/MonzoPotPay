@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Monzolator{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col col-1">
+            <strong>Id:&nbsp;</strong>
+        </div>
+        <div class="col">
+            <strong>Name: </strong>
+        </div>
+        <div class="col col-2">
+            <strong>Balance: </strong>
+        </div>
+    </div>
+    {% for pot in pots %}
+    <div class="row">
+        <div class="col col-1 col-id">
+            <span title="{{ pot.id }}">
+                ...{{ pot.id[-7:7] }}
+            </span>
+        </div>
+        <div class="col">
+            <span title="{{ pot.name }}">
+                {{ pot.name }}
+            </span>
+        </div>
+        <div class="col col-2">
+            <span title="{{ pot.balance }}">
+                £{{ pot.balance|slice(0,-2) }}.{{ pot.balance|slice(-2,2) }}
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {% dump pot %}
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
+{#
+$id The account's ID.
+* @property string $description The account description.
+* @property string $type Currently either "uk_prepaid" or "uk_retail" for most.
+* @property string $account_number UK account number, if a current account.
+* @property string $sort_code
+#}

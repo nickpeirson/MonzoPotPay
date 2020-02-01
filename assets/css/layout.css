@@ -1,0 +1,15 @@
+body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+}
+
+.col {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.col.col-id,
+.col.col-type{
+    text-overflow: unset;
+}

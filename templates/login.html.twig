@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <form class="form-signin text-center" action="/connect/google">
+        <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <button id="google-button" class="btn btn-lg btn-block btn-outline-primary" type="submit">
+            <i class="fab fa-google"></i> Sign in with Google
+        </button>
+    </form>
+{% endblock %}

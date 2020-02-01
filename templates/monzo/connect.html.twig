@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Monzolator{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            {{ content }}
+            <a href="{{ url('monzo_accounts') }}">View accounts</a>
+        </div>
+    </div>
+{% endblock %}

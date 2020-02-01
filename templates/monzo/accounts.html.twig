@@ -1,0 +1,71 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Monzolator{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col col-1">
+            <strong>Id:&nbsp;</strong>
+        </div>
+        <div class="col col-1">
+            <strong>Type: </strong>
+        </div>
+        <div class="col col-4">
+            <strong>Description: </strong>
+        </div>
+        <div class="col">
+            <strong>Account number: </strong>
+        </div>
+        <div class="col">
+            <strong>Sort code: </strong>
+        </div>
+        <div class="col col-2">
+        </div>
+    </div>
+    {% for account in accounts %}
+    <div class="row">
+        <div class="col col-1 col-id">
+            <span title="{{ account.id }}">
+                ...{{ account.id[-7:7] }}
+            </span>
+        </div>
+        <div class="col col-1 col-type">
+            <span title="{{ account.type }}">
+                {{ account.type|slice(3) }}
+            </span>
+        </div>
+        <div class="col col-4">
+            <span title="{{ account.description|replace(owners) }}">
+                {{ account.description|replace(owners) }}
+            </span>
+        </div>
+        <div class="col">
+            {% if account.account_number is defined %}
+                <span title="{{ account.account_number }}">
+                    {{ account.account_number }}
+                </span>
+            {% endif %}
+        </div>
+        <div class="col">
+            {% if account.sort_code is defined %}
+                <span title="{{ account.sort_code|split('', 2)|join('-') }}">
+                    {{ account.sort_code|split('', 2)|join('-') }}
+                </span>
+            {% endif %}
+        </div>
+        <div class="col col-md-auto">
+            <a href="{{ url('monzo_account_pots', {'accountId': account.id}) }}">Pots</a>
+        </div>
+        <div class="col col-md-auto">
+            Sweep
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
+{#
+$id The account's ID.
+* @property string $description The account description.
+* @property string $type Currently either "uk_prepaid" or "uk_retail" for most.
+* @property string $account_number UK account number, if a current account.
+* @property string $sort_code
+#}

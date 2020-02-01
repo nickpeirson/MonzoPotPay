@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Monzolator{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <a href="{{ monzo_auth_url }}">Connect Monzo</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{ debug_output|default('') }}
+        </div>
+    </div>
+{% endblock %}
