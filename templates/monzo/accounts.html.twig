@@ -1,16 +1,10 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Monzolator{% endblock %}
+{% block title %}{{ parent() }} -  Accounts{% endblock %}
 
 {% block content %}
     <div class="row">
-        <div class="col col-1">
-            <strong>Id:&nbsp;</strong>
-        </div>
-        <div class="col col-1">
-            <strong>Type: </strong>
-        </div>
-        <div class="col col-4">
+        <div class="col col-5">
             <strong>Description: </strong>
         </div>
         <div class="col">
@@ -19,23 +13,16 @@
         <div class="col">
             <strong>Sort code: </strong>
         </div>
+        <div class="col col-1">
+            <strong>Type: </strong>
+        </div>
         <div class="col col-2">
         </div>
     </div>
     {% for account in accounts %}
     <div class="row">
-        <div class="col col-1 col-id">
+        <div class="col col-5">
             <span title="{{ account.id }}">
-                ...{{ account.id[-7:7] }}
-            </span>
-        </div>
-        <div class="col col-1 col-type">
-            <span title="{{ account.type }}">
-                {{ account.type|slice(3) }}
-            </span>
-        </div>
-        <div class="col col-4">
-            <span title="{{ account.description|replace(owners) }}">
                 {{ account.description|replace(owners) }}
             </span>
         </div>
@@ -53,19 +40,25 @@
                 </span>
             {% endif %}
         </div>
-        <div class="col col-md-auto">
-            <a href="{{ url('monzo_account_pots', {'accountId': account.id}) }}">Pots</a>
+        <div class="col col-1 col-type">
+            <span title="{{ account.type }}">
+                {{ account.type|slice(3) }}
+            </span>
         </div>
-        <div class="col col-md-auto">
-            Sweep
+        <div class="col col-2">
+                <div class="col col-md actions">
+                    <a href="{{ url('monzo_account_pots', {'accountId': account.id}) }}">Pots</a>
+                </div>
+            <div class="col col-md actions">
+                <a href="{{ url('monzo_account_registerhook', {'accountId': account.id}) }}">Register hook</a>
+            </div>
+            <div class="col col-md actions">
+                <a href="{{ url('monzo_account_removehooks', {'accountId': account.id}) }}">Remove hooks</a>
+            </div>
+                <div class="col col-md actions">
+                    Sweep
+                </div>
         </div>
     </div>
     {% endfor %}
 {% endblock %}
-{#
-$id The account's ID.
-* @property string $description The account description.
-* @property string $type Currently either "uk_prepaid" or "uk_retail" for most.
-* @property string $account_number UK account number, if a current account.
-* @property string $sort_code
-#}

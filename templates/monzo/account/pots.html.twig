@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Monzolator{% endblock %}
+{% block title %}{{ parent() }} - Pots{% endblock %}
 
 {% block content %}
     <div class="row">
@@ -15,6 +15,7 @@
         </div>
     </div>
     {% for pot in pots %}
+        {% dump pot %}
     <div class="row">
         <div class="col col-1 col-id">
             <span title="{{ pot.id }}">
@@ -30,11 +31,6 @@
             <span title="{{ pot.balance }}">
                 £{{ pot.balance|slice(0,-2) }}.{{ pot.balance|slice(-2,2) }}
             </span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            {% dump pot %}
         </div>
     </div>
     {% endfor %}

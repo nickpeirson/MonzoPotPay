@@ -1,0 +1,4 @@
+services:
+  App\:
+    resource: '../../../src/*'
+    exclude: '../../../src/{Prod,DependencyInjection,Entity,Migrations,Tests,Kernel.php}'

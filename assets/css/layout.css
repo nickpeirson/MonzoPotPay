@@ -10,6 +10,7 @@ body {
 }
 
 .col.col-id,
-.col.col-type{
+.col.col-type,
+.actions{
     text-overflow: unset;
 }

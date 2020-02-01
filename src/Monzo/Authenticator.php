@@ -84,6 +84,14 @@ class Authenticator
         $this->saveCredentials($user, $response);
     }
 
+    /**
+     * @param UserInterface $user
+     */
+    public function disconnectMonzo(UserInterface $user): void
+    {
+        $this->removeCredentials($user);
+    }
+
     private function validateState(string $stateToken): void
     {
         if (!($storedStateToken = $this->session->get('state_token'))) {
@@ -136,6 +144,24 @@ class Authenticator
         $this->session->set('monzo_credentials', $credentials);
         $entityManager->persist($credentials);
         $entityManager->flush();
+    }
+
+    /**
+     * @param UserInterface $user
+     */
+    private function removeCredentials(UserInterface $user): void
+    {
+        if ($this->session->has('monzo_credentials')) {
+            $this->session->remove('monzo_credentials');
+        }
+
+        $user = $user->getUsername();
+        $entityManager = $this->doctrine->getManager();
+        $repository = $this->doctrine->getRepository(MonzoCredentials::class);
+        if ($credentials = $repository->findOneBy(['userId' => $user])){
+            $entityManager->remove($credentials);
+            $entityManager->flush();
+        }
     }
 
     public function getAuthenticatedMonzo()

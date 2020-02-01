@@ -5,7 +5,7 @@
     {{ encore_entry_link_tags('login') }}
 {% endblock %}
 
-{% block title %}Login{% endblock %}
+{% block title %}{{ parent() }} - Login{% endblock %}
 
 {% block body %}
     <form class="form-signin text-center" action="/connect/google">
